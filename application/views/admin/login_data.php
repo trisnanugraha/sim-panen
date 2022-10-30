@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/toastr/toastr.min.css">
 </head>
 
-<body class="hold-transition login-page" id="bg-login">
+<body class="hold-transition login-page">
   <div class="login-box">
     <!-- /.login-logo -->
     <div class="card card-outline card-primary">
