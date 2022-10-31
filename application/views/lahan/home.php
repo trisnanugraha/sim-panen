@@ -6,7 +6,7 @@
                 <div class="card">
                     <div class="card-header bg-light">
                         <div class="text-left"> 
-                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="add()" title="Add Data"><i class="fas fa-plus"></i> Tambah Kegiatan</button>
+                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="add()" title="Add Data"><i class="fas fa-plus"></i> Tambah Lahan</button>
                         </div>
                     </div>
                     <!-- /.card-header -->
@@ -15,8 +15,9 @@
                             <thead>
                                 <tr class="bg-info text-center">
                                     <th>No.</th>
-                                    <th>Judul</th>
-                                    <th>Tanggal</th>
+                                    <th>Lokasi</th>
+                                    <th>Longitude</th>
+                                    <th>Latitude</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -35,5 +36,5 @@
     <!-- /.container-fluid -->
 </section>
 
-<?php echo $modal_tambah_kegiatan; ?>
+<?php echo $modal_tambah; ?>
 <div id="tempat-modal"></div>

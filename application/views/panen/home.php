@@ -6,17 +6,17 @@
                 <div class="card">
                     <div class="card-header bg-light">
                         <div class="text-left"> 
-                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="add()" title="Add Data"><i class="fas fa-plus"></i> Tambah Kegiatan</button>
+                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="add()" title="Add Data"><i class="fas fa-plus"></i> Tambah Panen</button>
                         </div>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="tabel-lahan" class="table table-bordered table-striped table-hover">
+                        <table id="tabel-panen" class="table table-bordered table-striped table-hover">
                             <thead>
                                 <tr class="bg-info text-center">
                                     <th>No.</th>
-                                    <th>Judul</th>
-                                    <th>Tanggal</th>
+                                    <th>Jumlah Panen</th>
+                                    <th>Jumlah Hasil</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -35,5 +35,5 @@
     <!-- /.container-fluid -->
 </section>
 
-<?php echo $modal_tambah_kegiatan; ?>
+<?php echo $modal_tambah; ?>
 <div id="tempat-modal"></div>
