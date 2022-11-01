@@ -5,102 +5,60 @@
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3><?php echo $kegiatan; ?></h3>
+                        <h3><?php echo $lahan; ?></h3>
 
-                        <p>Total Kegiatan</p>
+                        <p>Total Lahan</p>
                     </div>
                     <div class="icon">
-                        <i class="fas fa-chart-line"></i>
+                        <i class="fas fa-map-marked-alt"></i>
                     </div>
-                    <a href="<?php echo base_url('kegiatan'); ?>" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo base_url('lahan'); ?>" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <div class="col-lg-3 col-6">
                 <!-- small box -->
                 <div class="small-box bg-primary">
                     <div class="inner">
-                        <h3><?php echo $arsip; ?></h3>
+                        <h3><?php echo $budidaya; ?></h3>
 
-                        <p>Total Arsip</p>
+                        <p>Total Budidaya</p>
                     </div>
                     <div class="icon">
-                        <i class="fas fa-archive"></i>
+                        <i class="fas fa-seedling"></i>
                     </div>
-                    <a href="<?php echo base_url('arsip'); ?>" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo base_url('budidaya'); ?>" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <div class="col-lg-3 col-6">
                 <!-- small box -->
                 <div class="small-box bg-success">
                     <div class="inner">
-                        <h3><?php echo $isr; ?></h3>
+                        <h3><?php echo $panen; ?></h3>
 
-                        <p>Total ISR</p>
+                        <p>Total Panen</p>
                     </div>
                     <div class="icon">
-                        <i class="fas fa-database"></i>
+                        <i class="fas fa-chart-bar"></i>
                     </div>
-                    <a href="<?php echo base_url('isr'); ?>" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo base_url('panen'); ?>" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <div class="col-lg-3 col-6">
                 <!-- small box -->
                 <div class="small-box bg-warning">
                     <div class="inner">
-                        <h3><?php echo $cluster; ?></h3>
+                        <h3><?php echo $tanam; ?></h3>
 
-                        <p>Total Cluster</p>
+                        <p>Total Tanam</p>
                     </div>
                     <div class="icon">
-                        <i class="fas fa-city"></i>
+                        <i class="fas fa-leaf"></i>
                     </div>
-                    <a href="<?php echo base_url('cluster'); ?>" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo base_url('tanam'); ?>" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
         </div>
         <br>
-        <div id="graph"></div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card card-success">
-                    <div class="card-header">
-                        <h3 class="card-title col-form-label">Data Grafik Kegiatan</h3>
-                        <div class="card-tools col-md-6">
-                            <!-- <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                            <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                <i class="fas fa-times"></i>
-                            </button> -->
-                            <div class="col-md-12"><select class="form-control select2" name="tahun" id="tahun">
-                                    <option value="" selected disabled>Pilih Tahun</option>
-                                    <?php
-                                    foreach ($filterTahun as $t) { ?>
-                                        <option value="<?= $t->tahun; ?>"><?= $t->tahun; ?></option>
-                                    <?php } ?>
-                                </select></div>
-                        </div>
-                    </div>
-                    <div class="card-body pb-0" style="display: block;">
-                        <div class="chart">
-                            <div class="chartjs-size-monitor">
-                                <div class="chartjs-size-monitor-expand">
-                                    <div class=""></div>
-                                </div>
-                                <div class="chartjs-size-monitor-shrink">
-                                    <div class=""></div>
-                                </div>
-                            </div>
-                            <div id="chart-container">
-                                <canvas id="chartData" class="chartjs-render-monitor"></canvas>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.card-body -->
-            </div>
-        </div>
     </div>
     <!-- /.row -->
 </section>

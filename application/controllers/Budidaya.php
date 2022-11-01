@@ -44,6 +44,7 @@ class Budidaya extends MY_Controller
             $row[] = $no;
             $row[] = $budidaya->kd_produksi;
             $row[] = $budidaya->nama_produksi;
+            $row[] = $budidaya->id_produksi;
             $data[] = $row;
         }
 
@@ -79,13 +80,10 @@ class Budidaya extends MY_Controller
     public function update()
     {
         $this->_validate();
-        $id      = $this->input->post('kd_produksi_lama');
+        $id      = $this->input->post('id_produksi');
         $post = $this->input->post();
 
-        if ($id != $post['kd_produksi']) {
-            $this->kd_produksi = $post['kd_produksi'];
-        }
-
+        $this->kd_produksi = $post['kd_produksi'];
         $this->nama_produksi = $post['nama_produksi'];
 
         $this->Mod_budidaya->update($id, $this);
@@ -94,7 +92,7 @@ class Budidaya extends MY_Controller
 
     public function delete()
     {
-        $id = $this->input->post('kd_produksi');
+        $id = $this->input->post('id_produksi');
 
         $this->Mod_budidaya->delete($id);
         echo json_encode(array("status" => TRUE));

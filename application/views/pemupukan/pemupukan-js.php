@@ -4,11 +4,11 @@
 
     $(document).ready(function() {
 
-        table = $("#tabelcluster").DataTable({
+        table = $("#tabel-pemupukan").DataTable({
             "responsive": true,
             "autoWidth": false,
             "language": {
-                "sEmptyTable": "Data Cluster Masih Kosong"
+                "sEmptyTable": "Data Pemupukan Masih Kosong"
             },
             "processing": true, //Feature control the processing indicator.
             "serverSide": true, //Feature control DataTables' server-side processing mode.
@@ -16,12 +16,12 @@
 
             // Load data for the table's content from an Ajax source
             "ajax": {
-                "url": "<?php echo site_url('cluster/ajax_list') ?>",
+                "url": "<?php echo site_url('pemupukan/ajax_list') ?>",
                 "type": "POST"
             },
             //Set column definition initialisation properties.
             "columnDefs": [{
-                "targets": [0, 1, 2],
+                "targets": [0, 1, 2, 3, 4, 5],
                 "className": 'text-center'
             }, {
                 "searchable": false,
@@ -30,7 +30,7 @@
             }, {
                 "targets": [-1], //last column
                 "render": function(data, type, row) {
-                    return "<a class=\"btn btn-xs btn-outline-primary\" href=\"javascript:void(0)\" title=\"Edit\" onclick=\"edit(" + row[2] + ")\"><i class=\"fas fa-edit\"></i> Ubah</a></div> <div class=\"d-inline mx-1\"><a class=\"btn btn-xs btn-outline-danger\" href=\"javascript:void(0)\" title=\"Delete\" onclick=\"del(" + row[2] + ")\"><i class=\"fas fa-trash\"></i> Hapus</a></div>";
+                    return "<a class=\"btn btn-xs btn-outline-primary\" href=\"javascript:void(0)\" title=\"Edit\" onclick=\"edit(" + row[5] + ")\"><i class=\"fas fa-edit\"></i> Ubah</a></div> <div class=\"d-inline mx-1\"><a class=\"btn btn-xs btn-outline-danger\" href=\"javascript:void(0)\" title=\"Delete\" onclick=\"del(" + row[5] + ")\"><i class=\"fas fa-trash\"></i> Hapus</a></div>";
                 },
                 "orderable": false, //set not orderable
             }, ],
@@ -78,9 +78,9 @@
         }).then((result) => {
             if (result.value) {
                 $.ajax({
-                    url: "<?php echo site_url('cluster/delete'); ?>",
+                    url: "<?php echo site_url('pemupukan/delete'); ?>",
                     type: "POST",
-                    data: "id_cluster=" + id,
+                    data: "id_pemupukan=" + id,
                     cache: false,
                     dataType: 'json',
                     success: function(respone) {
@@ -114,7 +114,7 @@
         $('.form-group').removeClass('has-error'); // clear error class
         $('.help-block').empty(); // clear error string
         $('#modal_form').modal('show'); // show bootstrap modal
-        $('.modal-title').text('Tambah Cluster'); // Set Title to Bootstrap modal title
+        $('.modal-title').text('Tambah Pemupukan'); // Set Title to Bootstrap modal title
     }
 
     function edit(id) {
@@ -125,15 +125,18 @@
 
         //Ajax Load data from ajax
         $.ajax({
-            url: "<?php echo site_url('cluster/edit') ?>/" + id,
+            url: "<?php echo site_url('pemupukan/edit') ?>/" + id,
             type: "GET",
             dataType: "JSON",
             success: function(data) {
-                $('[name="id_cluster"]').val(data.id_cluster);
-                $('[name="nama_cluster"]').val(data.nama_cluster);
+                $('[name="id_pemupukan"]').val(data.id_pemupukan);
+                $('[name="id_lahan"]').val(data.id_lahan);
+                $('[name="tgl_pemupukan"]').val(data.tgl_pemupukan);
+                $('[name="jumlah_pupuk"]').val(data.jumlah_pupuk);
+                $('[name="lama_pupuk"]').val(data.lama_pupuk);
 
                 $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
-                $('.modal-title').text('Ubah Cluster'); // Set title to Bootstrap modal title
+                $('.modal-title').text('Ubah Pemupukan'); // Set title to Bootstrap modal title
 
             },
             error: function(jqXHR, textStatus, errorThrown) {
@@ -148,9 +151,9 @@
         var url;
 
         if (save_method == 'add') {
-            url = "<?php echo site_url('cluster/insert') ?>";
+            url = "<?php echo site_url('pemupukan/insert') ?>";
         } else {
-            url = "<?php echo site_url('cluster/update') ?>";
+            url = "<?php echo site_url('pemupukan/update') ?>";
         }
         var formdata = new FormData($('#form')[0]);
         // ajax adding data to database
@@ -171,12 +174,12 @@
                     if (save_method == 'add') {
                         Toast.fire({
                             icon: 'success',
-                            title: 'Data Cluster Berhasil Disimpan!'
+                            title: 'Data Pemupukan Berhasil Disimpan!'
                         });
                     } else if (save_method == 'update') {
                         Toast.fire({
                             icon: 'success',
-                            title: 'Data Kegiatan Berhasil Diubah!'
+                            title: 'Data Pemupukan Berhasil Diubah!'
                         });
                     }
                 } else {

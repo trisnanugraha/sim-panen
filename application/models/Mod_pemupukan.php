@@ -1,13 +1,13 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Mod_cluster extends CI_Model
+class Mod_pemupukan extends CI_Model
 {
 
-    var $table = 'tbl_cluster';
-    var $column_order = array('', 'nama_cluster');
-    var $column_search = array('nama_cluster');
-    var $order = array('id_cluster' => 'asc'); // default order 
+    var $table = 'tbl_pemupukan';
+    var $column_order = array('', 'lokasi', 'tgl_pemupukan', 'jumlah_pupuk', 'lama_pupuk');
+    var $column_search = array('lokasi', 'tgl_pemupukan', 'jumlah_pupuk', 'lama_pupuk');
+    var $order = array('id_pemupukan' => 'asc'); // default order 
 
     public function __construct()
     {
@@ -16,7 +16,12 @@ class Mod_cluster extends CI_Model
     }
     private function _get_datatables_query()
     {
-        $this->db->from($this->table);
+
+        $this->db->select('a.*,b.lokasi');
+        $this->db->join('tbl_lahan b', 'a.id_lahan=b.id_lahan');
+        $this->db->from("{$this->table} a");
+        $this->db->order_by('a.id_pemupukan', 'asc');
+
         $i = 0;
 
         foreach ($this->column_search as $item) // loop column 
@@ -76,10 +81,18 @@ class Mod_cluster extends CI_Model
             ->result();
     }
 
-    function get_cluster($id)
+    function get_pemupukan($id)
     {
-        $this->db->where('id_cluster', $id);
+        $this->db->where('id_pemupukan', $id);
         return $this->db->get($this->table)->row();
+    }
+
+    function get_foto($id)
+    {
+        $this->db->select('foto, foto2, foto3');
+        $this->db->from($this->table);
+        $this->db->where('id_kegiatan', $id);
+        return $this->db->get();
     }
 
     function insert($data)
@@ -90,13 +103,13 @@ class Mod_cluster extends CI_Model
 
     function update($id, $data)
     {
-        $this->db->where('id_cluster', $id);
+        $this->db->where('id_pemupukan', $id);
         $this->db->update($this->table, $data);
     }
 
     function delete($id)
     {
-        $this->db->where('id_cluster', $id);
+        $this->db->where('id_pemupukan', $id);
         $this->db->delete($this->table);
     }
 
@@ -107,4 +120,4 @@ class Mod_cluster extends CI_Model
     }
 }
 
-/* End of file Mod_cluster.php */
+/* End of file Mod_pemupukan.php */

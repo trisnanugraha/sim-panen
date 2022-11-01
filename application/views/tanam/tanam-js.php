@@ -4,11 +4,11 @@
 
     $(document).ready(function() {
 
-        table = $("#tabelarsip").DataTable({
+        table = $("#tabel-tanam").DataTable({
             "responsive": true,
             "autoWidth": false,
             "language": {
-                "sEmptyTable": "Data Arsip Masih Kosong"
+                "sEmptyTable": "Data Tanam Masih Kosong"
             },
             "processing": true, //Feature control the processing indicator.
             "serverSide": true, //Feature control DataTables' server-side processing mode.
@@ -16,27 +16,21 @@
 
             // Load data for the table's content from an Ajax source
             "ajax": {
-                "url": "<?php echo site_url('arsip/ajax_list') ?>",
+                "url": "<?php echo site_url('tanam/ajax_list') ?>",
                 "type": "POST"
             },
             //Set column definition initialisation properties.
             "columnDefs": [{
-                "targets": [0, 1, 2, 3],
+                "targets": [0, 1, 2, 3, 4, 5],
                 "className": 'text-center'
             }, {
                 "searchable": false,
                 "orderable": false,
                 "targets": 0
             }, {
-                "targets": [-2], //last column
-                "render": function(data, type, row) {
-                    return row[2] + " <div class=\"d-inline mx-1\"><a class=\"btn btn-xs btn-outline-success\" href=\"<?php echo site_url('upload/arsip/'); ?>" + row[2] + "\" target=\"_blank\" title=\"Preview\"><i class=\"fas fa-eye\"></i> Preview</a></div>";
-                },
-                "orderable": false, //set not orderable
-            }, {
                 "targets": [-1], //last column
                 "render": function(data, type, row) {
-                    return "<div class=\"d-inline mx-1\"><a class=\"btn btn-xs btn-outline-primary\" href=\"javascript:void(0)\" title=\"Edit\" onclick=\"edit(" + row[3] + ")\"><i class=\"fas fa-edit\"></i> Ubah</a></div> <div class=\"d-inline mx-1\"><a class=\"btn btn-xs btn-outline-danger\" href=\"javascript:void(0)\" title=\"Delete\" onclick=\"del(" + row[3] + ")\"><i class=\"fas fa-trash\"></i> Hapus</a></div>";
+                    return "<a class=\"btn btn-xs btn-outline-primary\" href=\"javascript:void(0)\" title=\"Edit\" onclick=\"edit(" + row[5] + ")\"><i class=\"fas fa-edit\"></i> Ubah</a></div> <div class=\"d-inline mx-1\"><a class=\"btn btn-xs btn-outline-danger\" href=\"javascript:void(0)\" title=\"Delete\" onclick=\"del(" + row[5] + ")\"><i class=\"fas fa-trash\"></i> Hapus</a></div>";
                 },
                 "orderable": false, //set not orderable
             }, ],
@@ -56,22 +50,7 @@
             $(this).next().empty();
             $(this).removeClass('is-invalid');
         });
-
-        $('#foto').change(function(e) {
-            var foto = e.target.files[0].name;
-            $('#label-foto').html(foto);
-        });
-
-        $('#berkas_arsip').change(function(e) {
-            var arsip = e.target.files[0].name;
-            $('#label-arsip').html(arsip);
-        });
     });
-
-    var loadFoto = function(event) {
-        var foto = document.getElementById('view_foto');
-        foto.href = URL.createObjectURL(event.target.files[0]);
-    };
 
     function reload_table() {
         table.ajax.reload(null, false); //reload datatable ajax 
@@ -99,9 +78,9 @@
         }).then((result) => {
             if (result.value) {
                 $.ajax({
-                    url: "<?php echo site_url('arsip/delete'); ?>",
+                    url: "<?php echo site_url('tanam/delete'); ?>",
                     type: "POST",
-                    data: "id_arsip=" + id,
+                    data: "id_tanam=" + id,
                     cache: false,
                     dataType: 'json',
                     success: function(respone) {
@@ -135,7 +114,7 @@
         $('.form-group').removeClass('has-error'); // clear error class
         $('.help-block').empty(); // clear error string
         $('#modal_form').modal('show'); // show bootstrap modal
-        $('.modal-title').text('Tambah Arsip'); // Set Title to Bootstrap modal title
+        $('.modal-title').text('Tambah Tanam'); // Set Title to Bootstrap modal title
     }
 
     function edit(id) {
@@ -146,22 +125,18 @@
 
         //Ajax Load data from ajax
         $.ajax({
-            url: "<?php echo site_url('arsip/edit') ?>/" + id,
+            url: "<?php echo site_url('tanam/edit') ?>/" + id,
             type: "GET",
             dataType: "JSON",
             success: function(data) {
-                var url = "<?php echo base_url('upload/arsip/') ?>"
-                $('[name="id_arsip"]').val(data.id_arsip);
-                $('[name="nama_arsip"]').val(data.nama_arsip);
-                if (data.berkas_arsip != null) {
-                    $('#view_arsip').attr("href", url + data.berkas_arsip);
-                    $('#label-arsip').text(data.berkas_arsip);
-                    $('[name="file_arsip"]').val(data.berkas_arsip);
-                } else {
-                    $('#view_arsip').attr("href", '');
-                }
+                $('[name="id_tanam"]').val(data.id_tanam);
+                $('[name="id_lahan"]').val(data.id_lahan);
+                $('[name="id_produksi"]').val(data.id_produksi);
+                $('[name="tgl_tanam"]').val(data.tgl_tanam);
+                $('[name="jml_tanam"]').val(data.jml_tanam);
+
                 $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
-                $('.modal-title').text('Ubah Arsip'); // Set title to Bootstrap modal title
+                $('.modal-title').text('Ubah Tanam'); // Set title to Bootstrap modal title
 
             },
             error: function(jqXHR, textStatus, errorThrown) {
@@ -176,9 +151,9 @@
         var url;
 
         if (save_method == 'add') {
-            url = "<?php echo site_url('arsip/insert') ?>";
+            url = "<?php echo site_url('tanam/insert') ?>";
         } else {
-            url = "<?php echo site_url('arsip/update') ?>";
+            url = "<?php echo site_url('tanam/update') ?>";
         }
         var formdata = new FormData($('#form')[0]);
         // ajax adding data to database
@@ -196,19 +171,15 @@
                 {
                     $('#modal_form').modal('hide');
                     reload_table();
-                    var arsip = document.getElementById('view_arsip');
-                    arsip.href = "";
-                    $('#label-arsip').text('Pilih File');
-                    $('[name="file_arsip"]').val('');
                     if (save_method == 'add') {
                         Toast.fire({
                             icon: 'success',
-                            title: 'Data Arsip Berhasil Disimpan!'
+                            title: 'Data Tanam Berhasil Disimpan!'
                         });
                     } else if (save_method == 'update') {
                         Toast.fire({
                             icon: 'success',
-                            title: 'Data Arsip Berhasil Diubah!'
+                            title: 'Data Tanam Berhasil Diubah!'
                         });
                     }
                 } else {
@@ -234,17 +205,8 @@
         });
     }
 
-    var loadArsip = function(event) {
-        var arsip = document.getElementById('view_arsip');
-        arsip.href = URL.createObjectURL(event.target.files[0]);
-    };
-
     function batal() {
         $('#form')[0].reset();
         reload_table();
-        var arsip = document.getElementById('view_arsip');
-        arsip.href = "";
-        $('#label-arsip').text('Pilih File');
-        $('[name="file_arsip"]').val('');
     }
 </script>

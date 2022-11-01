@@ -1,13 +1,13 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Mod_kegiatan extends CI_Model
+class Mod_tanam extends CI_Model
 {
 
-    var $table = 'tbl_kegiatan';
-    var $column_order = array('', 'judul', 'tanggal');
-    var $column_search = array('judul', 'tanggal');
-    var $order = array('id_kegiatan' => 'asc'); // default order 
+    var $table = 'tbl_tanam';
+    var $column_order = array('', 'lokasi', 'kd_produksi', 'tgl_tanam', 'jml_tanam');
+    var $column_search = array('lokasi', 'kd_produksi', 'tgl_tanam', 'jml_tanam');
+    var $order = array('id_tanam' => 'asc'); // default order 
 
     public function __construct()
     {
@@ -16,7 +16,13 @@ class Mod_kegiatan extends CI_Model
     }
     private function _get_datatables_query()
     {
-        $this->db->from($this->table);
+
+        $this->db->select('a.*,b.lokasi, c.kd_produksi');
+        $this->db->join('tbl_lahan b', 'a.id_lahan=b.id_lahan');
+        $this->db->join('tbl_budidaya c', 'a.id_produksi=c.id_produksi');
+        $this->db->from("{$this->table} a");
+        $this->db->order_by('a.id_tanam', 'asc');
+
         $i = 0;
 
         foreach ($this->column_search as $item) // loop column 
@@ -76,26 +82,9 @@ class Mod_kegiatan extends CI_Model
             ->result();
     }
 
-    function get_tahun()
+    function get_tanam($id)
     {
-        $this->db->select('tanggal');
-        $this->db->group_by('YEAR(tanggal)');
-        return $this->db->get($this->table)
-            ->result();
-    }
-
-    function get_bulan()
-    {
-        $this->db->select('tanggal');
-        $this->db->group_by('MONTH(tanggal)');
-        return $this->db->get($this->table)
-            ->result();
-    }
-
-
-    function get_kegiatan($id)
-    {
-        $this->db->where('id_kegiatan', $id);
+        $this->db->where('id_tanam', $id);
         return $this->db->get($this->table)->row();
     }
 
@@ -115,13 +104,13 @@ class Mod_kegiatan extends CI_Model
 
     function update($id, $data)
     {
-        $this->db->where('id_kegiatan', $id);
+        $this->db->where('id_tanam', $id);
         $this->db->update($this->table, $data);
     }
 
     function delete($id)
     {
-        $this->db->where('id_kegiatan', $id);
+        $this->db->where('id_tanam', $id);
         $this->db->delete($this->table);
     }
 
@@ -132,4 +121,4 @@ class Mod_kegiatan extends CI_Model
     }
 }
 
-/* End of file Mod_kegiatan.php */
+/* End of file Mod_lahan.php */

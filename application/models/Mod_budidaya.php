@@ -5,9 +5,9 @@ class Mod_budidaya extends CI_Model
 {
 
     var $table = 'tbl_budidaya';
-    var $column_order = array('', 'nama_produksi');
-    var $column_search = array('nama_produksi');
-    var $order = array('kd_produksi' => 'asc'); // default order 
+    var $column_order = array('','kd_produksi', 'nama_produksi');
+    var $column_search = array('kd_produksi', 'nama_produksi');
+    var $order = array('id_produksi' => 'asc'); // default order 
 
     public function __construct()
     {
@@ -78,7 +78,7 @@ class Mod_budidaya extends CI_Model
 
     function get_budidaya($id)
     {
-        $this->db->where('kd_produksi', $id);
+        $this->db->where('id_produksi', $id);
         return $this->db->get($this->table)->row();
     }
 
@@ -90,13 +90,13 @@ class Mod_budidaya extends CI_Model
 
     function update($id, $data)
     {
-        $this->db->where('kd_produksi', $id);
+        $this->db->where('id_produksi', $id);
         $this->db->update($this->table, $data);
     }
 
     function delete($id)
     {
-        $this->db->where('id_lahan', $id);
+        $this->db->where('id_produksi', $id);
         $this->db->delete($this->table);
     }
 
@@ -107,4 +107,4 @@ class Mod_budidaya extends CI_Model
     }
 }
 
-/* End of file Mod_lahan.php */
+/* End of file Mod_budidaya.php */

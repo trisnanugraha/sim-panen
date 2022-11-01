@@ -30,7 +30,7 @@
             }, {
                 "targets": [-1], //last column
                 "render": function(data, type, row) {
-                    return "<a class=\"btn btn-xs btn-outline-primary\" href=\"javascript:void(0)\" title=\"Edit\" onclick=\"edit(" + row[1] + ")\"><i class=\"fas fa-edit\"></i> Ubah</a></div> <div class=\"d-inline mx-1\"><a class=\"btn btn-xs btn-outline-danger\" href=\"javascript:void(0)\" title=\"Delete\" onclick=\"del(" + row[1] + ")\"><i class=\"fas fa-trash\"></i> Hapus</a></div>";
+                    return "<a class=\"btn btn-xs btn-outline-primary\" href=\"javascript:void(0)\" title=\"Edit\" onclick=\"edit(" + row[3] + ")\"><i class=\"fas fa-edit\"></i> Ubah</a></div> <div class=\"d-inline mx-1\"><a class=\"btn btn-xs btn-outline-danger\" href=\"javascript:void(0)\" title=\"Delete\" onclick=\"del(" + row[3] + ")\"><i class=\"fas fa-trash\"></i> Hapus</a></div>";
                 },
                 "orderable": false, //set not orderable
             }, ],
@@ -80,7 +80,7 @@
                 $.ajax({
                     url: "<?php echo site_url('budidaya/delete'); ?>",
                     type: "POST",
-                    data: "kd_produksi=" + id,
+                    data: "id_produksi=" + id,
                     cache: false,
                     dataType: 'json',
                     success: function(respone) {
@@ -125,11 +125,11 @@
 
         //Ajax Load data from ajax
         $.ajax({
-            url: "<?php echo site_url('lahan/edit') ?>/" + id,
+            url: "<?php echo site_url('budidaya/edit') ?>/" + id,
             type: "GET",
             dataType: "JSON",
             success: function(data) {
-                $('[name="kd_produksi_lama"]').val(data.kd_produksi);
+                $('[name="id_produksi"]').val(data.id_produksi);
                 $('[name="kd_produksi"]').val(data.kd_produksi);
                 $('[name="nama_produksi"]').val(data.nama_produksi);
 
