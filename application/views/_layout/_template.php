@@ -11,6 +11,12 @@
     <script src="<?php echo base_url(); ?>assets/plugins/jquery/jquery.min.js"></script>
     <!-- ChartJS -->
     <script src="<?php echo base_url(); ?>assets/plugins/chart.js/Chart.min.js"></script>
+
+    <style>
+        #mapid {
+            height: 500px;
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini">

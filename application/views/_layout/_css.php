@@ -41,6 +41,8 @@
 <!-- Bootstrap4 Duallistbox -->
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
 
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin="" />
+
 <!-- <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/morris/css/morris.css"> -->
 <!-- Theme style -->
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/css/adminlte.min.css">
