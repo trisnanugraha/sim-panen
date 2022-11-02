@@ -35,6 +35,26 @@
                                         <td class=\"px-2\">:</td>\
                                         <td>" + data[i].latitude + "</td>\
                                     </tr>\
+                                    <tr>\
+                                        <td>Tanggal Pemupukan</td>\
+                                        <td class=\"px-2\">:</td>\
+                                        <td>" + data[i].tgl_pemupukan + "</td>\
+                                    </tr>\
+                                    <tr>\
+                                        <td>Tanggal Tanam</td>\
+                                        <td class=\"px-2\">:</td>\
+                                        <td>" + data[i].tgl_tanam + "</td>\
+                                    </tr>\
+                                    <tr>\
+                                        <td>Jumlah Tanam</td>\
+                                        <td class=\"px-2\">:</td>\
+                                        <td>" + data[i].jml_tanam + "</td>\
+                                    </tr>\
+                                    <tr>\
+                                        <td>Jumlah Panen</td>\
+                                        <td class=\"px-2\">:</td>\
+                                        <td>" + data[i].jumlah_panen + "</td>\
+                                    </tr>\
                                 </table>"
 
                     marker = new L.marker([data[i].longitude, data[i].latitude])

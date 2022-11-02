@@ -82,14 +82,6 @@ class Mod_lahan extends CI_Model
         return $this->db->get($this->table)->row();
     }
 
-    function get_foto($id)
-    {
-        $this->db->select('foto, foto2, foto3');
-        $this->db->from($this->table);
-        $this->db->where('id_kegiatan', $id);
-        return $this->db->get();
-    }
-
     function insert($data)
     {
         $insert = $this->db->insert($this->table, $data);

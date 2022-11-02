@@ -12,7 +12,7 @@ class Maps extends MY_Controller
         $this->load->helper('myfunction_helper');
         $this->load->model('Mod_user');
         $this->load->model('Mod_userlevel');
-        $this->load->model('Mod_lahan');
+        $this->load->model('Mod_maps');
     }
 
     function index()
@@ -29,7 +29,7 @@ class Maps extends MY_Controller
     }
 
     function fetch_data(){
-        $data = $this->Mod_lahan->get_all();
+        $data = $this->Mod_maps->fetch_data();
         echo json_encode($data);
     }
 }
